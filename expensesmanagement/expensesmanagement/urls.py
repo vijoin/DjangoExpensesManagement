@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views as base_views
+from expenses import views as expenses_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base_views.homepage),
+    path('expenses/report/<int:year>/<int:month>', expenses_views.report_monthly_expenses)
 ]

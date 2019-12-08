@@ -23,4 +23,14 @@ class ExpenseTestCase(TestCase):
 
     def test_base_template(self):
         response = self.client.get('/')
-        self.assertTemplateUsed(template_name='base.html')
+        self.assertTemplateUsed(response, template_name='base.html')
+
+    def test_monthly_expenses_report(self):
+        endpoint = '/expenses/report/2019/12'
+        response = self.client.get(endpoint)
+        self.assertEqual(response.status_code, 200)
+
+    def test_monthly_expenses_report_template(self):
+        endpoint = '/expenses/report/2019/12'
+        response = self.client.get(endpoint)
+        self.assertTemplateUsed(response, template_name='monthly_report.html')
